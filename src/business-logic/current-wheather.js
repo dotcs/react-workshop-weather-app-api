@@ -39,9 +39,9 @@ function generateMockData() {
   return mockBaseData.map(x => ({
     locationId: x.locationId,
     locationName: x.locationName,
-    temperature: randomizeTemperature(x.temperature),
-    minTemperature: x.temperature + randomizeNumber(-8, 4),
-    maxTemperature: x.temperature + randomizeNumber(3, 4)
+    temperature: Math.floor(randomizeTemperature(x.temperature)),
+    minTemperature: Math.floor(x.temperature + randomizeNumber(-8, 4)),
+    maxTemperature: Math.ceil(x.temperature + randomizeNumber(3, 4))
   }));
 }
 
