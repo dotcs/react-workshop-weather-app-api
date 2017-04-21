@@ -7,7 +7,7 @@ const app = express();
 
 // Middlewares
 app.use(bearerTokenParserMiddleware);
-app.use(authMiddleware);
+//app.use(authMiddleware);
 app.use(cors());
 
 // Router
