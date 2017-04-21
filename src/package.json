@@ -1,0 +1,19 @@
+{
+  "name": "wheather-api",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=7.9.0"
+  },
+  "main": "express-app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --use-strict start-server.js"
+  },
+  "author": "Johannes Schmitz <johannes.schmitz@inovex.de> (https://www.inovex.de/)",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.3",
+    "express-bearer-token": "^2.1.0"
+  },
+  "devDependencies": {}
+}

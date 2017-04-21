@@ -1,0 +1,160 @@
+---
+extends:
+  - eslint:recommended
+
+parser: typescript-eslint-parser
+plugins:
+  - typescript
+
+env:
+  node: true
+  es6: true
+
+ecmaFeatures:
+  # Enable all ES6 features
+  arrowFunctions: true
+  binaryLiterals: true
+  blockBindings: true
+  classes: true
+  defaultParams: true
+  destructuring: true
+  forOf: true
+  generators: true
+  # modules: true
+  objectLiteralComputedProperties: true
+  objectLiteralDuplicateProperties: true
+  objectLiteralShorthandMethods: true
+  objectLiteralShorthandProperties: true
+  octalLiterals: true
+  regexUFlag: true
+  regexYFlag: true
+  spread: true
+  superInFunctions: true
+  templateStrings: true
+  unicodeCodePointEscapes: true
+  globalReturn: true
+
+parserOptions:
+  sourceType: module
+
+
+rules:
+
+  # --- Safety / clean code ----------------------------------------------------
+
+  strict:
+    # Disallow 'use strict' directives, as strict mode is forced by running
+    # Node.js with `--use-strict`
+    - error
+    - never
+
+  eqeqeq: error      # Disallow lenient comparison operators (`==` and `!=`)
+
+  no-undef: error    # Disallow use of undeclared variables / constants
+
+  radix: error       # Require radix for parseInt()
+
+  no-console:
+    # Disallow `console.log`, use proper loggers instead
+    - warn
+
+  no-process-env:
+    # Disable use of `process.env` scattered throughout the codebase. Use an inline ESLint config
+    # comment to override this rule in configuration modules (but only there):
+    # `/* eslint no-process-env: off */`
+    - error
+
+
+  # --- Basic checks -----------------------------------------------------------
+
+  no-unused-vars:    # Warnings for unused variables
+    - warn
+    - vars: all
+      args: after-used
+      argsIgnorePattern: ^_
+
+  no-mixed-spaces-and-tabs:
+    - warn
+    - smart-tabs     # Allows mixing tabs and spaces for *alignment*
+
+
+  # --- Style ------------------------------------------------------------------
+
+  indent:
+    - warn
+    - 2              # Indent with two spaces
+    - SwitchCase: 1  # Allow indenting `case` keywords with 1 indent unit
+
+  semi:              # Disallow semicolons
+    - error
+    - always
+
+  quotes:            # Force single quotes
+    - error
+    - single
+
+  camelcase: warn
+
+  # Maximum line length
+  max-len:
+    - error
+    - 100
+
+
+  # Whitespace rules (enforce consistency)
+
+  eol-last:
+    - error
+    - always
+
+  comma-spacing:
+    - error
+    - before: false
+      after: true
+
+  # Spaces next to brackets in array literals
+  array-bracket-spacing:
+    - error
+    - always
+
+  # Spaces next to curly brackets in object literals
+  object-curly-spacing:
+    - error
+    - always
+
+  keyword-spacing:
+    # E.g.: `if(true) {` → `if (true) {`
+    - error
+    - before: true
+      after: true
+
+  space-before-blocks:
+    - error
+    - always
+
+  space-before-function-paren:
+    # Valid:   `function foo(x) { …`
+    # Valid:   `function (x) { …`
+    # Invalid: `function(x) { …`
+    - error
+    - anonymous: always
+      named: never
+
+  arrow-spacing:
+    # Force space around arrow function arrows
+    - error
+    - before: true
+      after: true
+
+  space-infix-ops:
+    # Force spaces around infix operators, e.g.: `1+2` → `1 + 2`
+    - error
+
+  # TODO:
+  # - Enforce four spaces before line comments, if not at beginning of line (Python-style)
+
+  # --- Various ---------------------------------------------------------------
+
+  yoda:              # Disencourage Yoda-style conditionals
+    - warn
+    - never
