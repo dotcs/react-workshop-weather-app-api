@@ -3,7 +3,7 @@
  */
 
 const express = require('express');
-const currentWheather = require('./business-logic/current-wheather');
+const currentWheather = require('./business-logic/current-weather');
 const { createHandler } = require('./util');
 
 

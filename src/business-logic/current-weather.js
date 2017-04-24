@@ -5,6 +5,8 @@ const config = {
   randomnessRange: 3    // degrees Celsius
 };
 
+const weatherStates = [ 'rainy', 'cloudy', 'sunny' ];
+
 const mockBaseData = [
   // (Will be enhanced programatically)
   {
@@ -36,18 +38,29 @@ const mockBaseData = [
 
 
 function generateMockData() {
-  return mockBaseData.map(x => ({
-    locationId: x.locationId,
-    locationName: x.locationName,
-    temperature: Math.floor(randomizeTemperature(x.temperature)),
-    minTemperature: Math.floor(x.temperature + randomizeNumber(-8, 4)),
-    maxTemperature: Math.ceil(x.temperature + randomizeNumber(3, 4))
-  }));
+
+  return mockBaseData.map(x => {
+    const state = randomizeStatus();
+    const ret = {
+      locationId: x.locationId,
+      locationName: x.locationName,
+      temperature: Math.floor(randomizeTemperature(x.temperature)),
+      minTemperature: Math.floor(x.temperature + randomizeNumber(-8, 4)),
+      maxTemperature: Math.ceil(x.temperature + randomizeNumber(3, 4)),
+    };
+    if (!state) { return ret; }
+    return Object.assign({}, ret, { state });
+  });
 }
 
 
 function randomizeNumber(number, range) {
   return number + Math.random() * range - (range / 2);
+}
+
+function randomizeStatus() {
+  const index = Math.floor(randomizeNumber(0, 4) + 4/2);
+  return weatherStates[index];
 }
 
 
@@ -75,10 +88,10 @@ module.exports.getAll = () => {
  * @return {Promise}
  */
 module.exports.get = ({ locationId }) => {
-  const wheatherData = generateMockData().filter(x => x.locationId === locationId)[0];
+  const weatherData = generateMockData().filter(x => x.locationId === locationId)[0];
 
-  const promise = wheatherData
-    ? Promise.resolve(wheatherData)
+  const promise = weatherData
+    ? Promise.resolve(weatherData)
     : Promise.reject(new Error(`Invalid \`locationId\`: ${locationId}`));
 
   return delayPromise(promise, 60);
