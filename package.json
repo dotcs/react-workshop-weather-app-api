@@ -7,7 +7,7 @@
   "main": "express-app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --use-strict start-server.js"
+    "start": "node --use-strict src/start-server.js"
   },
   "author": "Johannes Schmitz <johannes.schmitz@inovex.de> (https://www.inovex.de/)",
   "license": "ISC",

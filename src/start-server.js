@@ -1,4 +1,4 @@
-const expressApp = require('./');
+const expressApp = require('./express-app');
 const config = require('./config');
 
 expressApp.listen(config.port, () => {
